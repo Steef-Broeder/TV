@@ -1,13 +1,11 @@
-from flask import Flask, request
+import asyncio
+import websockets
+import socket
 
-app = Flask(__name__)
-
-# Endpoint to receive commands from the browser extension
-@app.route('/command', methods=['POST'])
-def receive_command():
-    data = request.json
+async def receive_command(websocket, path):
+    data = await websocket.recv()
     command = data.get('command')
-    
+        
     # Handle different commands
     if command == 'open':
         video_url = data.get('video_url')
@@ -18,24 +16,27 @@ def receive_command():
         volume_up()
     elif command == 'volume_down':
         volume_down()
-    return 'OK'
 
-def play_video(video_url):
-    print(f"Playing video: {video_url}")
-    pass
+    def play_video(video_url):
+        print(f"Playing video: {video_url}")
+        pass
 
-def stop_video():
-    print("Stopping video")
-    pass
+    def stop_video():
+        print("Stopping video")
+        pass
 
-def volume_up():
-    print("Increasing volume")
-    pass
+    def volume_up():
+        print("Increasing volume")
+        pass
 
-def volume_down():
-    print("Decreasing volume")
-    pass
+    def volume_down():
+        print("Decreasing volume")
+        pass
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5555)
-    print("server started")
+ip_address = socket.gethostbyname(socket.gethostname())
+print(f"Server running on IP: {ip_address}")
+
+start_server = websockets.serve(receive_command, ip_address, 5555)
+
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_forever()
