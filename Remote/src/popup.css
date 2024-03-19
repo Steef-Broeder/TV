@@ -1,0 +1,24 @@
+html {
+    width: 200px;
+    height: 150px;
+}
+
+body {
+    background-color: #323232;
+}
+
+h1 {
+    margin-top: 0; 
+    margin-bottom: 0;
+    color: #eeeeee;
+}
+
+input {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+button {
+    background-color: #717171;
+}
