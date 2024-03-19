@@ -43,7 +43,8 @@ def volume_down():
 ip_address = socket.gethostbyname(socket.gethostname())
 print(f"Server running on IP: {ip_address}")
 
-start_server = websockets.serve(receive_command, ip_address, 5555)
+async def main():
+    async with websockets.serve(receive_command, ip_address, 5555):
+        await asyncio.Future()  # run forever
 
-asyncio.get_event_loop().run_until_complete(start_server)
-asyncio.get_event_loop().run_forever()
+asyncio.run(main())
