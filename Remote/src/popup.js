@@ -2,6 +2,7 @@ const connectButton = document.getElementById('connectButton');
 const ipAddressInput = document.getElementById('ipAddressInput');
 const volumeUpButton = document.getElementById('volumeUpButton');
 const volumeDownButton = document.getElementById('volumeDownButton');
+const castButton = document.getElementById('castButton');
 
 let socket = null;
 
@@ -40,5 +41,11 @@ volumeUpButton.addEventListener('click', () => {
 volumeDownButton.addEventListener('click', () => {
     if (socket) {
         socket.send(JSON.stringify({ command: 'volume_down' }));
+    }
+});
+
+castButton.addEventListener('click', () => {
+    if (socket) {
+        socket.send(JSON.stringify({ command: 'video' }));
     }
 });
