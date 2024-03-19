@@ -38,4 +38,5 @@ def volume_down():
     pass
 
 if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5555)
     print(f"App is running on port 5555")
