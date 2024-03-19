@@ -1,5 +1,4 @@
 from flask import Flask, request
-import socket
 
 app = Flask(__name__)
 
@@ -39,4 +38,4 @@ def volume_down():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5555)
-    print(f"App is running on port 5555")
+    print("server started")
