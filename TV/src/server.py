@@ -6,6 +6,8 @@ from pynput.keyboard import Key,Controller
 import time
 import json
 
+import webbrowser
+
 keyboard = Controller()
 
 async def receive_command(websocket, path):
@@ -19,7 +21,7 @@ async def receive_command(websocket, path):
             command = data.get('command')
                 
             # Handle different commands
-            if command == 'open':
+            if command == 'video':
                 video_url = data.get('video_url')
                 play_video(video_url)
             elif command == 'stop':
@@ -38,6 +40,7 @@ async def receive_command(websocket, path):
 
 def play_video(video_url):
     print(f"Playing video: {video_url}")
+    webbrowser.open_new_tab(video_url)
     pass
 
 def stop_video():
@@ -60,7 +63,7 @@ async def main(ip):
     async with websockets.serve(receive_command, ip, 5555):
         await asyncio.Future()
 
-ip_address = input("What is your local ip?")
+ip_address = input("What is your local ip?\n")
 if ip_address == "":
     ip_address = socket.gethostbyname(socket.gethostname())
 print(f"Server running on IP: {ip_address}:5555")
